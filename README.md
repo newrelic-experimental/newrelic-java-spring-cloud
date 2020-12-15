@@ -1,6 +1,6 @@
 [![New Relic Experimental header](https://github.com/newrelic/opensource-website/raw/master/src/images/categories/Experimental.png)](https://opensource.newrelic.com/oss-category/#new-relic-experimental)
 
-# [Project Name - use format "newrelic-java-<name>"] [build badges go here when available]
+# newrelic-java-spring-cloud-gateway [build badges go here when available]
 
 >[Brief description - what is the project and value does it provide? How often should users expect to get releases? How is versioning set up? Where does this project want to go?]
 
@@ -39,7 +39,7 @@ New Relic has open-sourced this project. This project is provided AS-IS WITHOUT 
 
 ## Contributing
 
-We encourage your contributions to improve [Project Name]! Keep in mind when you submit your pull request, you'll need to sign the CLA via the click-through using CLA-Assistant. You only have to sign the CLA one time per project. If you have any questions, or to execute our corporate CLA, required if your contribution is on behalf of a company, please drop us an email at opensource@newrelic.com.
+We encourage your contributions to improve newrelic-java-spring-cloud-gateway! Keep in mind when you submit your pull request, you'll need to sign the CLA via the click-through using CLA-Assistant. You only have to sign the CLA one time per project. If you have any questions, or to execute our corporate CLA, required if your contribution is on behalf of a company, please drop us an email at opensource@newrelic.com.
 
 **A note about vulnerabilities**
 
@@ -49,6 +49,6 @@ If you believe you have found a security vulnerability in this project or any of
 
 ## License
 
-[Project Name] is licensed under the [Apache 2.0](http://apache.org/licenses/LICENSE-2.0.txt) License.
+newrelic-java-spring-cloud-gateway is licensed under the [Apache 2.0](http://apache.org/licenses/LICENSE-2.0.txt) License.
 
->[If applicable: [Project Name] also uses source code from third-party libraries. You can find full details on which libraries are used and the terms under which they are licensed in the third-party notices document.]
+>[If applicable: newrelic-java-spring-cloud-gateway also uses source code from third-party libraries. You can find full details on which libraries are used and the terms under which they are licensed in the third-party notices document.]
