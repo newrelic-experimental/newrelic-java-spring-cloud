@@ -1,28 +1,21 @@
+
 [![New Relic Experimental header](https://github.com/newrelic/opensource-website/raw/master/src/images/categories/Experimental.png)](https://opensource.newrelic.com/oss-category/#new-relic-experimental)
 
-# newrelic-java-spring-cloud-gateway [build badges go here when available]
+# newrelic-java-spring-cloud
 
->[Brief description - what is the project and value does it provide? How often should users expect to get releases? How is versioning set up? Where does this project want to go?]
+>New Relic Java agent instrumentation extension for [Spring Cloud Gateway](https://spring.io/projects/spring-cloud-gateway). 
 
 ## Installation
 
-> [Include a step-by-step procedure on how to get your code installed. Be sure to include any third-party dependencies that need to be installed separately]
-
-## Getting Started
-
->[Simple steps to start working with the software similar to a "Hello World"]
-
-## Usage
-
->[**Optional** - Include more thorough instructions on how to use the software. This section might not be needed if the Getting Started section is enough. Remove this section if it's not needed.]
+Drop the extension jar in the newrelic "extensions" folder (create this folder if it does not exist).
 
 ## Building
 
->[**Optional** - Include this section if users will need to follow specific instructions to build the software from source. Be sure to include any third party build dependencies that need to be installed separately. Remove this section if it's not needed.]
+```sh
+$ gradle clean build
+```
+builds the spring-cloud-gateway-1.0.jar in the spring-cloud-gateway/build/libs folder
 
-## Testing
-
->[**Optional** - Include instructions on how to run tests if we include tests with the codebase. Remove this section if it's not needed.]
 
 ## Support
 
@@ -51,4 +44,3 @@ If you believe you have found a security vulnerability in this project or any of
 
 newrelic-java-spring-cloud-gateway is licensed under the [Apache 2.0](http://apache.org/licenses/LICENSE-2.0.txt) License.
 
->[If applicable: newrelic-java-spring-cloud-gateway also uses source code from third-party libraries. You can find full details on which libraries are used and the terms under which they are licensed in the third-party notices document.]
