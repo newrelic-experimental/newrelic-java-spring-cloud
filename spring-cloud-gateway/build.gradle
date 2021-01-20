@@ -25,10 +25,18 @@ dependencies {
       
 }
 
-
+//Manifest-Version: 1.0
+//Implementation-Title: com.newrelic.instrumentation.lib
+//Implementation-Version: 1.0
+//Implementation-Vendor-Id: Field Instrumentation
 jar {
   manifest {
-       attributes 'Implementation-Title': project.group + '.' + project.name, 'Implementation-Vendor-Id': 'Field Instrumentation', 'Implementation-Version': version
+       attributes(
+               'Manifest-Version': '1.0',
+               'Implementation-Title': 'com.newrelic.instrumentation.lib',
+               'Implementation-Version': '1.0',
+               'Implementation-Vendor-Id': 'Field Instrumentation'
+       )
   }
 }
 
