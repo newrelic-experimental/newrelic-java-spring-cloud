@@ -1,7 +1,7 @@
 
 [![New Relic Experimental header](https://github.com/newrelic/opensource-website/raw/master/src/images/categories/Experimental.png)](https://opensource.newrelic.com/oss-category/#new-relic-experimental)
 
-# newrelic-java-spring-cloud
+# New Relic Java Instrumentation for Spring Cloud Gateway
 
 >New Relic Java agent instrumentation extension for [Spring Cloud Gateway](https://spring.io/projects/spring-cloud-gateway). 
 
