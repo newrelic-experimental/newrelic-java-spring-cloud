@@ -17,11 +17,10 @@ public abstract class FilteringWebHandler_Instrumentation {
     @Trace(dispatcher = true)
     public Mono<Void> handle(ServerWebExchange exchange) {
 
-
         try {
             final Pattern versionPattern = Pattern.compile("[vV][0-9]{1,}");
             final Pattern idPattern = Pattern.compile("^(?=[^\\s]*?[0-9])[-{}().:_|0-9]+$");
-            final Pattern codPattern = Pattern.compile("^(?=[^\\s]*?[0-9])(?=[^\\s]*?[a-zA-Z])(?!\\{id\\})[-{}().:_|a-zA-Z0-9]*$");
+            final Pattern codPattern = Pattern.compile("^(?=[^\\s]*?[0-9])(?=[^\\s]*?[a-zA-Z])(?!\\{id\\}).*$");
 
             String path = exchange.getRequest().getPath().value();
 
@@ -51,9 +50,7 @@ public abstract class FilteringWebHandler_Instrumentation {
             System.out.println("ERROR spring-cloud-gateway Instrumentation: " + e.getMessage());
         }
 
-        Mono<Void> ret = Weaver.callOriginal();
-
-        return ret;
+        return Weaver.callOriginal();
     }
 
 

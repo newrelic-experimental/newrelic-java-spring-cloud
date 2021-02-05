@@ -1,48 +1,47 @@
 plugins {
     id 'java-library'
-	id 'eclipse'
+    id 'eclipse'
 }
 
 repositories {
-   maven {
-      url 'https://repo1.maven.org/maven2'
-   }
-   flatDir {
-       dirs 'lib'
-   }
+    maven {
+        url 'https://repo1.maven.org/maven2'
+    }
+    flatDir {
+        dirs 'lib'
+    }
 }
 
-group = 'com.newrelic.instrumentation'
+group = 'com.newrelic.instrumentation.lib'
 version = '1.0'
 
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
 dependencies {
-  compile group: 'io.projectreactor', name: 'reactor-core', version: '3.4.1'
-  compile group: 'org.springframework', name: 'spring-web', version: '5.3.2'
-  compile group: 'org.springframework.cloud', name: 'spring-cloud-gateway-core', version: '2.2.6.RELEASE'
-  
-  // If using older agent JARs to compile
-  compile fileTree(dir: 'lib', includes: ['*.jar'])
-      
+    compile group: 'io.projectreactor', name: 'reactor-core', version: '3.4.1'
+    compile group: 'org.springframework', name: 'spring-web', version: '5.3.2'
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-gateway-core', version: '2.2.6.RELEASE'
+
+    // If using older agent JARs to compile
+    compile fileTree(dir: 'lib', includes: ['*.jar'])
+
 }
 
-//Manifest-Version: 1.0
-//Implementation-Title: com.newrelic.instrumentation.lib
-//Implementation-Version: 1.0
-//Implementation-Vendor-Id: Field Instrumentation
 jar {
-  manifest {
-       attributes(
-               'Manifest-Version': '1.0',
-               'Implementation-Title': 'com.newrelic.instrumentation.lib',
-               'Implementation-Version': '1.0',
-               'Implementation-Vendor-Id': 'Field Instrumentation'
-       )
-  }
+    manifest {
+        attributes(
+                'Manifest-Version': version,
+                'Implementation-Title': group,
+                'Implementation-Version': version,
+                'Implementation-Vendor-Id': 'Field Instrumentation'
+        )
+    }
 }
 
 task install(dependsOn: jar, type: Copy) {
     description = 'Copies compiled jar to the NEW_RELIC_EXTENSIONS_DIR.'
-    group  = 'New Relic'
+    group = 'New Relic'
 
     def extDir = System.getenv("NEW_RELIC_EXTENSIONS_DIR") ?: " "
 
@@ -50,17 +49,18 @@ task install(dependsOn: jar, type: Copy) {
     into extDir
 }
 
-install.doFirst  {
+install.doFirst {
     def extDir = System.getenv("NEW_RELIC_EXTENSIONS_DIR")
-     if (extDir == null) {
-         throw new Exception("Must set NEW_RELIC_EXTENSIONS_DIR.")
-     }
+    if (extDir == null) {
+        throw new Exception("Must set NEW_RELIC_EXTENSIONS_DIR.")
+    }
 
-     if (extDir.startsWith("~" + File.separator)) {
-         extDir = System.getProperty("user.home") + extDir.substring(1);
-     }
+    if (extDir.startsWith("~" + File.separator)) {
+        extDir = System.getProperty("user.home") + extDir.substring(1);
+    }
 
-     if (!file(extDir).directory) {
-         throw new Exception(extDir + "NEW_RELIC_EXTENSIONS_DIR, set as '" + extDir + "'is not a valid directory.")
-     }
+    if (!file(extDir).directory) {
+        throw new Exception(extDir + "NEW_RELIC_EXTENSIONS_DIR, set as '" + extDir + "'is not a valid directory.")
+    }
 }
+
