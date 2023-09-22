@@ -34,7 +34,7 @@ jar {
                 'Manifest-Version': version,
                 'Implementation-Title': group,
                 'Implementation-Version': version,
-                'Implementation-Vendor-Id': 'Field Instrumentation'
+                'Implementation-Vendor-Id': 'New Relic Labs'
         )
     }
 }
