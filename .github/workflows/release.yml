@@ -55,7 +55,7 @@ jobs:
         run: |
           major_version=1
           minor_version=0
-          patch_revision=1
+          patch_revision=0
 
           # Retrieve the latest release tag
           latest_tag=$(git describe --abbrev=0 --tags 2>/dev/null) || true
