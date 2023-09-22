@@ -12,7 +12,7 @@ repositories {
     }
 }
 
-group = 'com.newrelic.instrumentation.lib'
+group = 'com.newrelic.instrumentation.labs.lib'
 version = '1.0'
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -41,7 +41,7 @@ jar {
 
 task install(dependsOn: jar, type: Copy) {
     description = 'Copies compiled jar to the NEW_RELIC_EXTENSIONS_DIR.'
-    group = 'New Relic'
+    group = 'New Relic Labs'
 
     def extDir = System.getenv("NEW_RELIC_EXTENSIONS_DIR") ?: " "
 
