@@ -1,7 +1,8 @@
 ## Version: [v1.0.0](https://github.com/newrelic-experimental/newrelic-java-spring-cloud/releases/tag/v1.0.0) | Created: 2023-09-27
 ### Build Upgrades
-- Et java version 8 on build
 - Updated vendor title
+
+
 
 
 ## Installation
