@@ -1,3 +1,11 @@
+## Version: [v1.1.0](https://github.com/newrelic-experimental/newrelic-java-spring-cloud/releases/tag/v1.1.0) | Created: 2024-01-31
+### Features
+- Added enhancement for additional methods and reporting external services
+
+### Bug Fixes
+- Added gradle-templates-1.5.jar for latest template
+
+
 ## Version: [v1.0.0](https://github.com/newrelic-experimental/newrelic-java-spring-cloud/releases/tag/v1.0.0) | Created: 2023-09-27
 ### Build Upgrades
 - Updated vendor title
