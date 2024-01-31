@@ -1,7 +1,8 @@
-package com.newrelic.labs;
+package com.newrelic.instrumentation.labs.spring.cloud.gw;
 
 import com.newrelic.api.agent.NewRelic;
 import com.newrelic.api.agent.Trace;
+import com.newrelic.api.agent.TransactionNamePriority;
 import com.newrelic.api.agent.weaver.MatchType;
 import com.newrelic.api.agent.weaver.Weave;
 import com.newrelic.api.agent.weaver.Weaver;
@@ -43,8 +44,9 @@ public abstract class FilteringWebHandler_Instrumentation {
                 }
             }
 
-            NewRelic.setTransactionName("Web", simplifiedPath);
-            NewRelic.getAgent().getLogger().log(Level.FINER,
+            //NewRelic.setTransactionName("Web", simplifiedPath);
+            NewRelic.getAgent().getTransaction().setTransactionName(TransactionNamePriority.CUSTOM_HIGH, true, "SpringCloudGW", new String[]{"handle", simplifiedPath});
+            NewRelic.getAgent().getLogger().log(Level.FINEST,
                     "spring-cloud-gateway Instrumentation: Setting web transaction name to " + simplifiedPath);
         } catch (Exception e) {
             System.out.println("ERROR spring-cloud-gateway Instrumentation: " + e.getMessage());
