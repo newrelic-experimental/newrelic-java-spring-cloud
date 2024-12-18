@@ -1,3 +1,7 @@
+## Version: [v1.1.2](https://github.com/newrelic-experimental/newrelic-java-spring-cloud/releases/tag/v1.1.2) | Created: 2024-12-18
+
+
+
 ## Version: [v1.1.1](https://github.com/newrelic-experimental/newrelic-java-spring-cloud/releases/tag/v1.1.1) | Created: 2024-12-18
 
 
