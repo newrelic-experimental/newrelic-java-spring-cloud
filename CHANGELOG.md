@@ -1,3 +1,11 @@
+## Version: [v1.1.2](https://github.com/newrelic-experimental/newrelic-java-spring-cloud/releases/tag/v1.1.2) | Created: 2024-12-18
+
+
+
+## Version: [v1.1.1](https://github.com/newrelic-experimental/newrelic-java-spring-cloud/releases/tag/v1.1.1) | Created: 2024-12-18
+
+
+
 ## Version: [v1.1.0](https://github.com/newrelic-experimental/newrelic-java-spring-cloud/releases/tag/v1.1.0) | Created: 2024-01-31
 ### Features
 - Added enhancement for additional methods and reporting external services
