@@ -1,0 +1,27 @@
+
+// Build.gradle generated for instrumentation module spring-cloud-gateway-mvc
+
+apply plugin: 'java'
+
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
+
+dependencies {
+	implementation 'org.springframework.cloud:spring-cloud-gateway-server-mvc:4.1.0'
+    implementation 'org.springframework:spring-webmvc:5.3.16'
+
+   implementation fileTree(include: ['*.jar'], dir: '../libs')
+}
+
+jar {
+  manifest {
+    attributes 'Implementation-Title': 'com.newrelic.instrumentation.labs.spring-cloud-gateway-mvc-4.1'
+    attributes 'Implementation-Vendor': 'New Relic'
+    attributes 'Implementation-Vendor-Id': 'com.newrelic'
+    attributes 'Implementation-Version': 1.0
+  }
+}
+
+verifyInstrumentation {
+   passes 'org.springframework.cloud:spring-cloud-gateway-server-mvc:[4.1.0,)'
+}
