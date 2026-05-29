@@ -3,8 +3,8 @@
 
 apply plugin: 'java'
 
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
+//sourceCompatibility = JavaVersion.VERSION_17
+//targetCompatibility = JavaVersion.VERSION_17
 
 dependencies {
 	implementation 'org.springframework.cloud:spring-cloud-gateway-server-mvc:4.1.0'
