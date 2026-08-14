@@ -18,7 +18,7 @@ jar {
     attributes 'Implementation-Title': 'com.newrelic.instrumentation.labs.spring-cloud-gateway-mvc-4.1'
     attributes 'Implementation-Vendor': 'New Relic'
     attributes 'Implementation-Vendor-Id': 'com.newrelic'
-    attributes 'Implementation-Version': 1.0
+    attributes 'Implementation-Version': 1.1
   }
 }
 

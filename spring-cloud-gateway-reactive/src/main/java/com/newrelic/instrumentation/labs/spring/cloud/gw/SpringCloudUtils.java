@@ -6,6 +6,7 @@ import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.G
 
 import java.net.URI;
 import java.util.Map;
+import java.util.logging.Level;
 import java.util.regex.Pattern;
 
 import org.springframework.http.HttpMethod;
@@ -13,10 +14,11 @@ import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.web.server.ServerWebExchange;
 
 import com.newrelic.api.agent.HttpParameters;
+import com.newrelic.api.agent.NewRelic;
 import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.isAlreadyRouted;
 
 public class SpringCloudUtils {
-	
+
     private static final Pattern versionPattern = Pattern.compile("[vV][0-9]{1,}");
     private static final Pattern idPattern = Pattern.compile("^(?=[^\\s]*?[0-9])[-{}().:_|0-9]+$");
     private static final Pattern codPattern = Pattern.compile("^(?=[^\\s]*?[0-9])(?=[^\\s]*?[a-zA-Z])(?!\\{id\\}).*$");
@@ -37,12 +39,13 @@ public class SpringCloudUtils {
 			HttpParameters params = HttpParameters.library("Spring-Cloud").uri(requestUrl).procedure(method.name()).noInboundHeaders().build();
 			return params;
 		} catch (Exception e) {
+			NewRelic.getAgent().getLogger().log(Level.FINEST, e, "spring-cloud-gateway Instrumentation: Unable to build HttpParameters for exchange");
 		}
-		
+
 		return null;
 	}
-	
-	public static String getSimpliedPath(ServerWebExchange exchange)  {
+
+	public static String getSimplifiedPath(ServerWebExchange exchange)  {
         String path = exchange.getRequest().getPath().value();
 
         String simplifiedPath = path;

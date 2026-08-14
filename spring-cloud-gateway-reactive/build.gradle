@@ -5,15 +5,28 @@ targetCompatibility = JavaVersion.VERSION_1_8
 
 dependencies {
     implementation 'io.projectreactor:reactor-core:3.4.1'
+    implementation 'io.projectreactor.netty:reactor-netty-http:1.0.24'
     implementation 'org.springframework:spring-web:5.3.2'
-    implementation 'org.springframework.cloud:spring-cloud-gateway-core:2.2.6.RELEASE'
+    implementation 'org.springframework.cloud:spring-cloud-gateway-server:2.2.6.RELEASE'
 
-    // New Relic Java Agent dependencies
-   implementation 'com.newrelic.agent.java:newrelic-agent:6.4.0'
-   implementation 'com.newrelic.agent.java:newrelic-api:6.4.0'
+    // New Relic Java Agent dependencies - pinned to java.agent.version (see root gradle.properties)
+    // so this module builds and tests against the same agent line customers actually run.
+   implementation 'com.newrelic.agent.java:newrelic-agent:' + project.findProperty('java.agent.version')
+   implementation 'com.newrelic.agent.java:newrelic-api:' + project.findProperty('java.agent.version')
+   implementation 'com.newrelic.agent.java:agent-bridge:' + project.findProperty('java.agent.version')
+   testImplementation 'com.newrelic.agent.java:agent-bridge-datastore:' + project.findProperty('java.agent.version')
    implementation fileTree(include: ['*.jar'], dir: '../libs')
-   implementation fileTree(include: ['*.jar'], dir: '../test-lib') 
+   implementation fileTree(include: ['*.jar'], dir: '../test-lib')
 
+    // Test dependencies
+    testImplementation 'org.springframework:spring-test:5.3.2'
+    // WebClient (for the real end-to-end gateway+backend test) lives in spring-webflux, not spring-web.
+    testImplementation 'org.springframework:spring-webflux:5.3.2'
+    // Pulled in transitively by instrumentation-test at v9.3.0 (via project(":newrelic-agent")'s own
+    // dependency on the security agent) - without it, Transaction's constructor throws
+    // NoClassDefFoundError on SecurityMetaData and every @Trace-woven transaction silently fails to start.
+    testImplementation 'com.newrelic.agent.java.security:newrelic-security-api:1.7.0'
+    testImplementation 'com.newrelic.agent.java.security:newrelic-security-agent:1.7.0'
 }
 
 jar {
@@ -21,17 +34,13 @@ jar {
     attributes 'Implementation-Title': 'com.newrelic.instrumentation.labs.spring-cloud-gateway-reactive'
     attributes 'Implementation-Vendor': 'New Relic Labs'
     attributes 'Implementation-Vendor-Id': 'com.newrelic.labs'
-    attributes 'Implementation-Version': 1.1
+    attributes 'Implementation-Version': 1.2
   }
 }
 
 verifyInstrumentation {
-//  passes("org.springframework.cloud:spring-cloud-gateway-core:[2.2.6.RELEASE,)") {
- //     compile 'org.springframework:spring-web:5.3.2'
-
-//    }
   passes("org.springframework.cloud:spring-cloud-gateway-server:[2.2.6.RELEASE,)") {
-  		compile 'org.springframework:spring-web:5.3.2' 
+  		compile 'org.springframework:spring-web:5.3.2'
   }
 }
 

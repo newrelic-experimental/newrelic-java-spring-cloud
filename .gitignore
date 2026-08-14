@@ -21,6 +21,11 @@ gen/
 **/build/
 **/bin/
 
+# Populated locally by the root getAgent/extractJars/cleanUp tasks from the publicly downloadable
+# newrelic-agent jar - not meant to be committed (test-lib/ is the one exception: it holds
+# instrumentation-test.jar, which isn't published anywhere and must be vendored).
+libs/
+
 #Maven
 target/
  
