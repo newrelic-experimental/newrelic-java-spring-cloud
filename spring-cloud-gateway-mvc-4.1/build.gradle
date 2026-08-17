@@ -10,6 +10,12 @@ dependencies {
 	implementation 'org.springframework.cloud:spring-cloud-gateway-server-mvc:4.1.0'
     implementation 'org.springframework:spring-webmvc:5.3.16'
 
+    // New Relic Java Agent API dependencies - declared directly (not just via fileTree(dir: '../libs'),
+    // which is only populated locally by the root getAgent/extractJars tasks and isn't present on a
+    // fresh checkout, e.g. CI) so this module compiles out of the box.
+    implementation 'com.newrelic.agent.java:newrelic-api:' + project.findProperty('java.agent.version')
+    implementation 'com.newrelic.agent.java:newrelic-weaver-api:' + project.findProperty('java.agent.version')
+
    implementation fileTree(include: ['*.jar'], dir: '../libs')
 }
 
