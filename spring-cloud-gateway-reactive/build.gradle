@@ -1,7 +1,10 @@
 apply plugin: 'java'
 
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(8)
+    }
+}
 
 dependencies {
     implementation 'io.projectreactor:reactor-core:3.4.1'
@@ -39,8 +42,8 @@ jar {
 }
 
 verifyInstrumentation {
-  passes("org.springframework.cloud:spring-cloud-gateway-server:[2.2.6.RELEASE,)") {
-  		compile 'org.springframework:spring-web:5.3.2'
+  passesOnly("org.springframework.cloud:spring-cloud-gateway-server:[2.2.6.RELEASE,)") {
+  		implementation 'org.springframework:spring-web:5.3.2'
   }
 }
 

@@ -24,10 +24,10 @@ jobs:
           fetch-depth: 0
           
 
-      - name: Set up JDK 8
+      - name: Set up JDK 21
         uses: actions/setup-java@v3
         with:
-          java-version: 8
+          java-version: 21
           distribution: 'temurin'
 
 
@@ -39,10 +39,10 @@ jobs:
           mkdir /tmp/to
           echo "NEW_RELIC_EXTENSIONS_DIR=${HOME}/release" >> $GITHUB_ENV
 
-      - name: Build with Gradle and No verifyInstrumentation
+      - name: Build with Gradle and verifyInstrumentation
         run: |
 
-          ./gradlew clean build install 
+          ./gradlew clean install verifyInstrumentation
 
       - name: Identify Release Type
         id: define_release_type
@@ -117,7 +117,7 @@ jobs:
 
       - name: Create Release
         id: create_release
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.OPENSOURCE_BOT_TOKEN }}
           script: |
@@ -199,7 +199,7 @@ jobs:
             
       - name: Update Release
         id: update_release
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.OPENSOURCE_BOT_TOKEN }}
           script: |
