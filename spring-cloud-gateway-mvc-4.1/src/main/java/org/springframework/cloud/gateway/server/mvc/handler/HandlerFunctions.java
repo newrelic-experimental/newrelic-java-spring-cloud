@@ -36,7 +36,11 @@ public abstract class HandlerFunctions {
 						sb.append("=?");
 					}
 				}
-				NewRelic.getAgent().getTransaction().setTransactionName(TransactionNamePriority.FRAMEWORK_HIGH, false, "SoringGateway", "handle", sb.toString(),serverRequest.methodName());
+				// Trailing "(METHOD)" suffix, matching the reactive module's naming convention, so the
+				// same route with different verbs doesn't collapse into one indistinguishable name.
+				String method = serverRequest.methodName();
+				String pathWithMethod = (method == null || method.isEmpty()) ? sb.toString() : sb.toString() + " (" + method + ")";
+				NewRelic.getAgent().getTransaction().setTransactionName(TransactionNamePriority.FRAMEWORK_HIGH, false, "SpringCloudGW", "handle", pathWithMethod);
 			}
 			
 			return Weaver.callOriginal();

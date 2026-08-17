@@ -1,7 +1,13 @@
 name: Build and Release (Manual Run) v1.3
 
-on: 
+on:
  workflow_dispatch: # This event allows manual triggering
+
+# Explicit least-privilege grant for the default GITHUB_TOKEN (checkout, etc.) - the release/upload/
+# changelog steps below authenticate with secrets.OPENSOURCE_BOT_TOKEN instead, but some orgs default
+# GITHUB_TOKEN to read-only, which can otherwise surface as "Resource not accessible by integration".
+permissions:
+  contents: write
 
 env:
   THIRD_PARTY_GIT_AUTHOR_EMAIL: opensource+bot@newrelic.com
@@ -173,15 +179,17 @@ jobs:
 
           # Overwrite the original file with the updated content
           mv temp_file.txt "$file"
-          
-          # Commit the updated CHANGELOG.md file
-           git add CHANGELOG.md
-           git config  user.email "${{ env.THIRD_PARTY_GIT_AUTHOR_EMAIL }}"
-           git config  user.name "${{ env.THIRD_PARTY_GIT_AUTHOR_NAME }}"
-           git commit -m "Update Changelog for Release [skip ci]"
 
-          # Push the changes to the remote repository
-           git push --quiet --set-upstream origin HEAD
+          # Committing/pushing CHANGELOG.md back to the repo from this automated workflow is
+          # intentionally disabled - it's a bot commit landing on the branch with no review. The file
+          # above is still generated locally (and its content is used for the release body via
+          # steps.github_changelog.outputs.changelog), it's just not written back to the repo.
+          # Re-enable if this project wants CHANGELOG.md kept in sync automatically:
+          # git add CHANGELOG.md
+          # git config  user.email "${{ env.THIRD_PARTY_GIT_AUTHOR_EMAIL }}"
+          # git config  user.name "${{ env.THIRD_PARTY_GIT_AUTHOR_NAME }}"
+          # git commit -m "Update Changelog for Release [skip ci]"
+          # git push --quiet --set-upstream origin HEAD
       
       - name: Get Compare URL
         run: |

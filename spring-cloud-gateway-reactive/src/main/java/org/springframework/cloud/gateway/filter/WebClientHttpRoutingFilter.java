@@ -8,6 +8,7 @@ import com.newrelic.api.agent.Segment;
 import com.newrelic.api.agent.Trace;
 import com.newrelic.api.agent.weaver.Weave;
 import com.newrelic.api.agent.weaver.Weaver;
+import com.newrelic.instrumentation.labs.spring.cloud.gw.NRCancelRunnable;
 import com.newrelic.instrumentation.labs.spring.cloud.gw.NRCompletionConsumer;
 import com.newrelic.instrumentation.labs.spring.cloud.gw.NRErrorConsumer;
 import com.newrelic.instrumentation.labs.spring.cloud.gw.NRHolder;
@@ -23,7 +24,8 @@ public abstract class WebClientHttpRoutingFilter {
 		boolean skip = SpringCloudUtils.skip(exchange);
 		NRCompletionConsumer onCompleteConsumer = null;
 		NRErrorConsumer onErrorConsumer = null;
-		
+		NRCancelRunnable onCancelRunnable = null;
+
 		if(!skip) {
 			HttpParameters params = SpringCloudUtils.getParams(exchange);
 			Segment segment = NewRelic.getAgent().getTransaction().startSegment("CloudRequest");
@@ -31,13 +33,13 @@ public abstract class WebClientHttpRoutingFilter {
 			holder.reportAsExternal(params);
 			onCompleteConsumer = new NRCompletionConsumer(holder);
 			onErrorConsumer = new NRErrorConsumer(holder);
-			
+			onCancelRunnable = new NRCancelRunnable(holder);
 		}
-		
+
 		Mono<Void> resultMono = Weaver.callOriginal();
-		
+
 		if(!skip) {
-			return resultMono.doOnSuccess(onCompleteConsumer).doOnError(onErrorConsumer);
+			return resultMono.doOnSuccess(onCompleteConsumer).doOnError(onErrorConsumer).doOnCancel(onCancelRunnable);
 		}
 
 		return resultMono;

@@ -22,7 +22,7 @@ plugins {
 
 project.ext {
   group = 'com.newrelic.instrumentation'
-  javaAgentVersion = '6.4.0'
+  javaAgentVersion = project.findProperty('java.agent.version')
 
   // Aligned with minimum Java major version supported by latest Java Agent
   javaVersion = JavaVersion.VERSION_1_8
@@ -169,6 +169,7 @@ subprojects {
   dependencies {
     testImplementation  fileTree(dir: '../lib', include: "*.jar") // + project.javaAgentVersion
     testImplementation 'org.nanohttpd:nanohttpd:2.3.1'
+    testImplementation 'junit:junit:4.12'
     testImplementation 'com.newrelic.agent.java:newrelic-agent:' + project.javaAgentVersion
   }
 
